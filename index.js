@@ -1,7 +1,8 @@
-const express = require('express');
-const fetch = require('node-fetch');
+import fetch from 'node-fetch';
+import express from 'express';
 
 const app = express();
+const PORT = process.env.PORT || 3000;
 
 app.get('/proxy', async (req, res) => {
     const sheetUrl = 'https://docs.google.com/spreadsheets/d/10p2i0axdpEiXCtqtAOhf13kQV3iladroDpXlPNr8eFQ/gviz/tq?tqx=out:json';
@@ -15,5 +16,6 @@ app.get('/proxy', async (req, res) => {
     }
 });
 
-// Export the app as a function for Vercel serverless
-module.exports = app;
+app.listen(PORT, () => {
+    console.log(`Proxy server running on port ${PORT}`);
+});
